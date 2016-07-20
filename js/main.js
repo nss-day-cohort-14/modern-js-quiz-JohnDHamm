@@ -23,19 +23,25 @@ $("#secondRobotSelect").change(function(){
 });
 
 
-
-
 function updateHealths(){
 	$("#player1healthOutput").text(playerOneRobot.health);
 	$("#player2healthOutput").text(playerTwoRobot.health);
 }
 
+function checkWin(){
+	if (playerOneRobot.health < 1) {
+		$("#gameOver").append(`<h2>${$("#playerOneName").val()}, the ${playerOneRobot.name}, is dead.</h2>`);
+	} else if (playerTwoRobot.health < 1 ) {
+		$("#gameOver").append(`<h2>${$("#playerTwoName").val()}, the ${playerTwoRobot.name}, is dead.</h2>`);
+	}
+}
 
 //fight button clicked
 $("#fightBtn").click(function(){
 	playerOneRobot.health -= playerTwoRobot.damage;
 	playerTwoRobot.health -= playerOneRobot.damage;
 	updateHealths();
+	checkWin();
 });
 
 
